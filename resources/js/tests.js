@@ -80,6 +80,13 @@ MatchGameTests.testRenderCards = function(errors) {
 };
 
 MatchGameTests.testFlipCard = function(errors) {
+  var hasFlipCard = MatchGame.flipCard && typeof MatchGame.flipCard === 'function';
+  if (!hasFlipCard) {
+    errors.push("flipCard: MatchGame object should have a function called flipCard.");
+    // If flipCard function is missing, remaining tests will not work.
+    return;
+  }
+
   var $game = $('<div>');
   var cardValues = [1, 1, 2];
   MatchGame.renderCards(cardValues, $game);
